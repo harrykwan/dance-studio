@@ -109,6 +109,15 @@ onMounted(() => {
         .then(function (response) {
           //handle success
           console.log(response);
+          const customer = response.data.customer;
+          const subscription = response.data.id;
+          const invoice = response.data.latest_invoice;
+          const paymentresult = {
+            customer: customer,
+            subscription: subscription,
+            invoice: invoice,
+          };
+          console.log(paymentresult);
         })
         .catch(function (response) {
           //handle error

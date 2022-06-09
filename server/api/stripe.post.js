@@ -44,6 +44,6 @@ export default defineEventHandler(async (event) => {
       return result
     }
   } catch (err) {
-    return e.raw.message
+    return err.raw.message
   }
 })
