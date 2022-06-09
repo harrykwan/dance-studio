@@ -41,7 +41,7 @@
               <p>or Call us at 0344 32423453</p>
             </div>
             <div id="wizard_container">
-              <form id="wrapped" method="POST">
+              <form id="card-element" method="POST">
                 <input id="website" name="website" type="text" value="" />
                 <!-- Leave for security protection, read docs for details -->
                 <div id="middle-wizard">
@@ -289,3 +289,7 @@
   </main>
   <!-- /main -->
 </template>
+
+<script setup>
+onMounted(() => {});
+</script>

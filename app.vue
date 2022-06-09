@@ -66,5 +66,7 @@
     <!-- SPECIFIC SCRIPTS (wizard form) -->
     <Script src="js/wizard/wizard_scripts.min.js"></Script>
     <Script src="js/wizard/wizard_func.js"></Script>
+
+    <Script src="https://js.stripe.com/v3/" crossorigin="anonymous"></Script>
   </div>
 </template>
