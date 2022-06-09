@@ -97,19 +97,12 @@ onMounted(() => {
 
     // Give our token to our form
     const stripeTokenHandler = (token) => {
-      //   const hiddenInput = document.createElement("input");
-      //   hiddenInput.setAttribute("type", "hidden");
-      //   hiddenInput.setAttribute("name", "stripeToken");
-      //   hiddenInput.setAttribute("value", token.id);
-      //   form.appendChild(hiddenInput);
-
-      //   form.submit();
-
       axios({
         method: "post",
         url: "/api/stripe",
         data: {
           stripeToken: token.id,
+          type: "subscribe",
         },
         headers: { "Content-Type": "application/json" },
       })
