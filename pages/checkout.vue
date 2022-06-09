@@ -104,14 +104,14 @@ onMounted(() => {
       //   form.appendChild(hiddenInput);
 
       //   form.submit();
-      var bodyFormData = new FormData();
-      bodyFormData.append("stripeToken", token.id);
 
       axios({
         method: "post",
         url: "/api/stripe",
-        data: bodyFormData,
-        headers: { "Content-Type": "multipart/form-data" },
+        data: {
+          stripeToken: token.id,
+        },
+        headers: { "Content-Type": "application/json" },
       })
         .then(function (response) {
           //handle success

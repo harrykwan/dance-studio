@@ -3,32 +3,38 @@ const stripe = new Stripe(process.env.STRIPE_TEST_SK)
 
 export default defineEventHandler(async (event) => {
   const body = await useBody(event)
-  const result = await new Promise((resolve, reject) => {
-    try {
-      const courseprice = 300
-      const customerjson = {
-        name: body.name ? body.name : '',
-        email: body.email ? body.email : '',
-        phone: body.phone ? body.phone : '',
-        source: body.stripeToken,
-      }
 
-      stripe.customers.create(customerjson).then((customer) =>
-        stripe.charges
-          .create({
-            amount: courseprice,
-            currency: 'hkd',
-            mode: 'subscription',
-            customer: customer.id,
-          })
-          .then((x) => {
-            resolve(x)
-          }),
-      )
-    } catch (err) {
-      console.log(err.type)
-      reject(err)
+  try {
+    const itemprice = 400
+    const customerjson = {
+      name: body.name ? body.name : 'asdf',
+      email: body.email ? body.email : 'asdf@gmail.com',
+      phone: body.phone ? body.phone : '66581248',
+      source: body.stripeToken,
     }
-  })
-  return res.status(200).json(result)
+
+    const product = await stripe.products.create({
+      name: 'basic',
+    })
+    const customer = await stripe.customers.create(customerjson)
+    const result = await stripe.subscriptions.create({
+      items: [
+        {
+          price_data: {
+            recurring: {
+              interval: 'month',
+            },
+            product: product.id,
+            unit_amount: itemprice,
+            currency: 'hkd',
+          },
+        },
+      ],
+
+      customer: customer.id,
+    })
+    return result
+  } catch (err) {
+    return e.raw.message
+  }
 })
